@@ -26,6 +26,11 @@ function App() {
     });
   }, []);
 
+  const logout = ()=>{
+    sessionStorage.removeItem("accessToken");
+    setAuthState(false);
+  }
+
   return (
     <div className="App">
       <AuthContext.Provider value={{ authState, setAuthState }}>
@@ -34,11 +39,13 @@ function App() {
             <Link to="/">Home</Link>
             <Link to="/createpost">Create A Post</Link>
 
-            {!authState && (
+            {!authState ? (
               <>
                 <Link to="/login"> Login</Link>
                 <Link to="/registration"> Registration</Link>
               </>
+            ):(
+              <button onClick={logout}>Logout</button>
             )}
           </div>
 
